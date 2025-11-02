@@ -1,0 +1,84 @@
+﻿@model ApplicationUser
+
+
+@{
+    ViewBag.Title = "User Details";
+}
+
+<div class="content-wrapper">
+    <!-- Header -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">User Details</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="User" asp-action="Index">Users List</a>
+                        </li>
+                        <li class="breadcrumb-item active">Details</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h3 class="card-title">👤 Details for @Model.UserName</h3>
+                </div>
+
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="fw-bold">Username</label>
+                            <input asp-for="UserName" class="form-control" readonly />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="fw-bold">Email</label>
+                            <input asp-for="Email" class="form-control" readonly />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="fw-bold">Phone Number</label>
+                            <input asp-for="PhoneNumber" class="form-control" readonly />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="fw-bold">Created On</label>
+                            <input asp-for="CreatedOn" class="form-control" readonly />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="fw-bold">Status</label>
+                            <input class="form-control"
+                                   value="@(Model.IsActive ? "Active" : "Inactive")"
+                                   readonly />
+                        </div>
+                       
+
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a asp-controller="User" asp-action="Index" class="btn btn-primary me-2">
+                            <i class="fas fa-arrow-left"></i> Back to List
+                        </a>
+                       @*  <a asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning me-2">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <a asp-controller="User" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Delete
+                        </a> *@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

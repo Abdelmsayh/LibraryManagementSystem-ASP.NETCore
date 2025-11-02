@@ -1,0 +1,90 @@
+﻿@model IEnumerable<BookDTO>
+
+@{
+    var member = ViewBag.Member as MemberDTO;
+    ViewBag.Title = $"Borrowed Books - {member?.FullName ?? "Member"}";
+}
+
+<div class="content-wrapper">
+    <!-- Header -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-primary">
+                        📚 Borrowed Books for @member?.FullName
+                    </h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-controller="Member" asp-action="Index">Members</a></li>
+                        <li class="breadcrumb-item active">Borrowed Books</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title">
+                        📖 Books Currently Borrowed by @member?.FullName
+                    </h3>
+                </div>
+
+                <div class="card-body">
+                    @if (Model != null && Model.Any())
+                    {
+                        <table class="table table-bordered table-hover text-center">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Published Year</th>
+                                    <th>Rating</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var book in Model)
+                                {
+                                    <tr>
+                                        <td>@book.Title</td>
+                                        <td>@book.Author</td>
+                                        <td>@book.PublishedYear</td>
+                                        <td>@book.Rating</td>
+                                        <td>
+                                            @if (book.IsAvailable)
+                                            {
+                                                <span class="badge bg-success">Returned</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-warning text-dark">Borrowed</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info text-center">
+                            <i class="fas fa-info-circle"></i> No borrowed books found for this member.
+                        </div>
+                    }
+                </div>
+
+                <div class="card-footer text-center">
+                    <a asp-controller="Member" asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to Members
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

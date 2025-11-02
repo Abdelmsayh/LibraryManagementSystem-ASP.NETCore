@@ -1,0 +1,68 @@
+﻿@{
+    var member = ViewBag.Member as MemberDTO;
+    ViewBag.Title = $"Outstanding Fine - {member?.FullName ?? "Member"}";
+    decimal totalFine = Model != null ? Convert.ToDecimal(Model) : 0m;
+}
+
+<div class="content-wrapper">
+    <!-- Header -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-danger">
+                        💰 Fine Summary for @member?.FullName
+                    </h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-controller="Member" asp-action="Index">Members</a></li>
+                        <li class="breadcrumb-item active">Fines</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white">
+                    <h3 class="card-title">
+                        ⚠️ Outstanding Fines Details
+                    </h3>
+                </div>
+
+                <div class="card-body text-center">
+                    <h4>👤 Member: <strong>@member?.FullName</strong></h4>
+                    <h5>📧 Email: <strong>@member?.Email</strong></h5>
+                    <h5>📞 Phone: <strong>@member?.Phone</strong></h5>
+
+                    <hr />
+
+                    @if (totalFine > 0)
+                    {
+                        <div class="alert alert-danger p-4">
+                            <h3>💵 Total Outstanding Fine: <strong>@totalFine.ToString("C")</strong></h3>
+                            <p>Please settle your fine at the library counter before borrowing new books.</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-success p-4">
+                            <h3>✅ No Outstanding Fines</h3>
+                            <p>This member has no unpaid fines. Great job keeping track of your returns!</p>
+                        </div>
+                    }
+                </div>
+
+                <div class="card-footer text-center">
+                    <a asp-controller="Member" asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to Members
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

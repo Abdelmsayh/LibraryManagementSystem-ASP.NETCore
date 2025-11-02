@@ -1,0 +1,64 @@
+﻿@model BorrowingTransactionDTO
+
+@{
+    ViewBag.Title = "Borrow Details";
+}
+
+<div class="content-wrapper">
+    <!-- Header -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Borrow Details</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-controller="Borrow" asp-action="Index">Borrow List</a></li>
+                        <li class="breadcrumb-item active">Details</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h3 class="card-title">🗂️ Details for @Model.Id</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Member </label>
+                            <input type="text" class="form-control" asp-for="Member.FullName" readonly />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">DueDate</label>
+                            <input type="text" class="form-control" asp-for="DueDate" readonly />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Return Date</label>
+                            <input type="text" class="form-control" asp-for="ReturnDate" readonly />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Borrowing Date</label>
+                            <input type="text" class="form-control" asp-for="BorrowingDate" readonly />
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <a asp-controller="Borrow" asp-action="Index" class="btn btn-primary me-2">Return</a>
+                        <a asp-controller="Borrow" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-warning">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

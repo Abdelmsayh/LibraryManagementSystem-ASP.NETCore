@@ -1,0 +1,197 @@
+﻿@model MemberDTO
+@inject UserManager<ApplicationUser> _userManager
+
+
+@{
+    ViewBag.Title = $"Member Profile - {Model.FullName}";
+}
+
+<div class="content-wrapper">
+    <!-- Header -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-primary">👤 Member Profile</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-controller="Member" asp-action="Index">Members</a></li>
+                        <li class="breadcrumb-item active">Profile</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            
+
+            <div class="card shadow-sm border-0 rounded-3 overflow-hidden">
+                <div class="card-header bg-primary text-white d-flex align-items-center justify-content-between">
+                    <h3 class="card-title mb-0">👤 Personal Information</h3>
+                </div>
+
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        @{
+                            var currentUser = await _userManager.GetUserAsync(User);
+                            var imageName = currentUser?.ImageName ?? "default.png";
+                        }
+                        <div class="col-md-4 text-center mb-3 mb-md-0">
+                            <img src="~/Uploads/Users/@imageName"
+                                 id="userImage"
+                                 alt="Profile Image"
+                                 class="shadow-sm border border-2 border-light"
+                                 style="width: 200px; height: 200px; object-fit: cover; border-radius: 10px;">
+
+                            <form id="uploadForm"
+                                  asp-controller="Account"
+                                  asp-action="UploadProfileImage"
+                                  method="post"
+                                  enctype="multipart/form-data"
+                                  style="display:none;">
+                                <input type="file" id="imageInput" name="Image" accept="image/*" />
+                            </form>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <p class="mb-2"><strong>Full Name:</strong> @Model.FullName</p>
+                                    <p class="mb-2"><strong>Email:</strong> @Model.Email</p>
+                                    <p class="mb-2"><strong>Phone:</strong> @Model.Phone</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-2">
+                                        <strong>Joined:</strong> @Model.MembershipStartDate.ToString("dd MMM yyyy")
+                                    </p>
+                                    <p class="mb-2">
+                                        <strong>Status:</strong>
+                                        @if (Model.IsActive)
+                                        {
+                                            <span class="badge bg-success">Active</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">Inactive</span>
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Borrowing History -->
+            <div class="card mt-4 shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h3 class="card-title">📚 Borrowing History</h3>
+                </div>
+
+                <div class="card-body">
+                    @if (Model.BorrowingTransactions != null && Model.BorrowingTransactions.Any())
+                    {
+                        <table class="table table-bordered table-hover text-center">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Book ID</th>
+                                    <th>Borrow Date</th>
+                                    <th>Return Date</th>
+                                    <th>Status</th>
+                                    <th>Fine</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var borrow in Model.BorrowingTransactions)
+                                {
+                                    <tr>
+                                        <td>@borrow.BookId</td>
+                                        <td>@borrow.BorrowingDate.ToString("dd/MM/yyyy")</td>
+                                        <td>@(borrow.ReturnDate?.ToString("dd/MM/yyyy") ?? "Not Returned")</td>
+                                        <td>
+                                            @if (borrow.IsReturned)
+                                            {
+                                                <span class="badge badge-success">Returned</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-warning">Borrowed</span>
+                                            }
+                                        </td>
+                                        <td>@(borrow.FineAmount.ToString("C") ?? "0")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="alert alert-secondary text-center">
+                            <i class="fas fa-info-circle"></i> No borrowing history found.
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Reservation History -->
+            <div class="card mt-4 shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h3 class="card-title">📖 Reservation History</h3>
+                </div>
+
+                <div class="card-body">
+                    @if (Model.ReservationTransactions != null && Model.ReservationTransactions.Any())
+                    {
+                        <table class="table table-bordered table-hover text-center">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Book Id</th>
+                                    <th>Reservation Date</th>
+                                    <th>Expiration Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var res in Model.ReservationTransactions)
+                                {
+                                    <tr>
+                                        <td>@res.BookId</td>
+                                        <td>@res.ReservationDate.ToString("dd/MM/yyyy")</td>
+                                        <td>@(res.DueDate.ToString("dd/MM/yyyy") ?? "N/A")</td>
+                                        <td>
+                                            @if (res.IsActive)
+                                            {
+                                                <span class="badge badge-success">Active</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-secondary">Expired</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="alert alert-secondary text-center">
+                            <i class="fas fa-info-circle"></i> No reservation history found.
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a asp-controller="Member" asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Members
+                </a>
+            </div>
+        </div>
+    </section>
+</div>

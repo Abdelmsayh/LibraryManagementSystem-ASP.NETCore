@@ -1,0 +1,65 @@
+﻿@model MemberDTO
+
+@{
+    ViewBag.Title = $"Can Borrow - {Model.FullName}";
+    bool canBorrow = ViewBag.CanBorrow != null && (bool)ViewBag.CanBorrow;
+}
+
+<div class="content-wrapper">
+    <!-- Header -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-primary">📚 Borrowing Eligibility</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-controller="Member" asp-action="Index">Members</a></li>
+                        <li class="breadcrumb-item active">Can Borrow</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title">👤 Member Borrowing Status</h3>
+                </div>
+
+                <div class="card-body text-center">
+                    <h4>👤 <strong>@Model.FullName</strong></h4>
+                    <h5>📧 @Model.Email</h5>
+                    <h5>📞 @Model.Phone</h5>
+
+                    <hr />
+
+                    @if (canBorrow)
+                    {
+                        <div class="alert alert-success p-4">
+                            <h3>✅ This member <strong>CAN</strong> borrow books.</h3>
+                            <p>All requirements are met. You can proceed with a new borrowing transaction.</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-danger p-4">
+                            <h3>🚫 This member <strong>CANNOT</strong> borrow books currently.</h3>
+                            <p>Possible reasons: outstanding fines, unreturned books, or borrowing limit reached.</p>
+                        </div>
+                    }
+                </div>
+
+                <div class="card-footer text-center">
+                    <a asp-controller="Member" asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to Members
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

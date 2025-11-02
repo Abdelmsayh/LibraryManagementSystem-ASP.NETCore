@@ -1,0 +1,122 @@
+﻿@model IEnumerable<BLL.Models.BorrowingTransactionDTO>
+
+@{
+    ViewData["Title"] = "Overdue Transactions";
+}
+
+@section DataTabel {
+    <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+}
+
+@section JqueryValidation {
+    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+}
+
+@section Scripts {
+    <script>
+        $(function () {
+            $("#overdueTable").DataTable({
+                "responsive": true,
+                "lengthChange": true,
+                "autoWidth": false,
+                "order": [[3, "asc"]], // ترتيب حسب تاريخ الاستحقاق الأقدم
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#overdueTable_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-danger"><i class="fas fa-exclamation-triangle me-2"></i> Overdue Transactions</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item"><a asp-controller="Borrow" asp-action="Index">Transactions List</a></li>
+                        <li class="breadcrumb-item active text-danger">Overdue</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* --- Main content --- *@
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white">
+                    <h3 class="card-title mb-0">⚠️ Books Past Due Date</h3>
+                </div>
+
+                <div class="card-body">
+                    <table id="overdueTable" class="table table-bordered table-hover table-striped align-middle">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Member Name</th>
+                                <th>Borrow Date</th>
+                                <th><span class="text-warning">Due Date</span></th>
+                                <th>Days Late</th>
+                                <th>Estimated Fine</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                var index = 1;
+                                foreach (var item in Model)
+                                {
+                                    // حساب عدد الأيام المتأخرة
+                                    var daysLate = (DateTime.Now - item.DueDate).Days;
+                                    var fine = daysLate > 0 ? daysLate * 0.5m : 0m; // مثال بسيط لحساب الغرامة (افترض 0.5 للوحدة)
+
+                                    <tr class="@(daysLate > 7 ? "table-danger" : daysLate > 0 ? "table-warning" : "")">
+                                        <td class="text-center">@index</td>
+                                        <td>@(item.Member?.FullName ?? "N/A")</td>
+                                        <td>@item.BorrowingDate.ToShortDateString()</td>
+                                        <td class="fw-bold text-danger">@item.DueDate.ToShortDateString()</td>
+                                        <td class="fw-bold">
+                                            <span class="badge bg-danger">@daysLate</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-dark">@fine.ToString("C")</span>
+                                        </td>
+                                        <td class="text-center">
+                                            <a asp-controller="Borrow" asp-action="ReturnBook" asp-route-transactionId="@item.Id" class="btn btn-outline-primary btn-sm">
+                                                <i class="fas fa-undo"></i> Return
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    index++;
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="8" class="text-center text-muted py-3">
+                                        All transactions are up-to-date. No overdue books found! 🎉
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

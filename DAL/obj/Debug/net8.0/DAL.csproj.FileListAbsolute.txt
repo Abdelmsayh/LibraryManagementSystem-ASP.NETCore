@@ -1,0 +1,14 @@
+E:\CLS Course\.Net\LibareryMS.App\DAL\bin\Debug\net8.0\DAL.deps.json
+E:\CLS Course\.Net\LibareryMS.App\DAL\bin\Debug\net8.0\DAL.runtimeconfig.json
+E:\CLS Course\.Net\LibareryMS.App\DAL\bin\Debug\net8.0\DAL.dll
+E:\CLS Course\.Net\LibareryMS.App\DAL\bin\Debug\net8.0\DAL.pdb
+E:\CLS Course\.Net\LibareryMS.App\DAL\obj\Debug\net8.0\DAL.csproj.AssemblyReference.cache
+E:\CLS Course\.Net\LibareryMS.App\DAL\obj\Debug\net8.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+E:\CLS Course\.Net\LibareryMS.App\DAL\obj\Debug\net8.0\DAL.AssemblyInfoInputs.cache
+E:\CLS Course\.Net\LibareryMS.App\DAL\obj\Debug\net8.0\DAL.AssemblyInfo.cs
+E:\CLS Course\.Net\LibareryMS.App\DAL\obj\Debug\net8.0\DAL.csproj.CoreCompileInputs.cache
+E:\CLS Course\.Net\LibareryMS.App\DAL\obj\Debug\net8.0\DAL.dll
+E:\CLS Course\.Net\LibareryMS.App\DAL\obj\Debug\net8.0\refint\DAL.dll
+E:\CLS Course\.Net\LibareryMS.App\DAL\obj\Debug\net8.0\DAL.pdb
+E:\CLS Course\.Net\LibareryMS.App\DAL\obj\Debug\net8.0\DAL.genruntimeconfig.cache
+E:\CLS Course\.Net\LibareryMS.App\DAL\obj\Debug\net8.0\ref\DAL.dll

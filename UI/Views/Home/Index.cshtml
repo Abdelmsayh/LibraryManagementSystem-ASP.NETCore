@@ -1,0 +1,153 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">library Management System</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <!-- Total Books -->
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>@ViewBag.TotalBooks</h3>
+                            <p>Books</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <a asp-controller="Book" asp-action="Index" class="small-box-footer">
+                            View <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Total Members -->
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>@ViewBag.TotalMembers</h3>
+                            <p>Members</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <a asp-controller="Member" asp-action="Index" class="small-box-footer">
+                            View <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Total Reservations -->
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>@ViewBag.TotalReservations</h3>
+                            <p>Reservations</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <a asp-controller="Reservation" asp-action="Index" class="small-box-footer">
+                            View <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Total Borrowings -->
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>@ViewBag.TotalBorrowings</h3>
+                            <p>Borrowings</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-book-reader"></i>
+                        </div>
+                        <a asp-controller="Borrow" asp-action="Index" class="small-box-footer">
+                            View <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Optional: Recent Reservations Table -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="card-title">Recent Reservations</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Member</th>
+                                        <th>Book</th>
+                                        <th>Reservation Date</th>
+                                        <th>Due Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (ViewBag.RecentReservations != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var r in ViewBag.RecentReservations)
+                                        {
+                                            <tr>
+                                                <td>@i</td>
+                                                <td>@r.Member.FullName</td>
+                                                <td>@r.Book.Title</td>
+                                                <td>@r.ReservationDate.ToShortDateString()</td>
+                                                <td>@r.DueDate.ToShortDateString()</td>
+                                                <td>
+                                                    @if (r.IsActive && r.DueDate >= DateTime.Now.Date)
+                                                    {
+                                                        <span class="badge bg-success">Active</span>
+                                                    }
+                                                    else if (r.IsActive && r.DueDate < DateTime.Now.Date)
+                                                    {
+                                                        <span class="badge bg-warning text-dark">Expired</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge bg-danger">Cancelled</span>
+                                                    }
+                                                </td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="6" class="text-center">No recent reservations found.</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>

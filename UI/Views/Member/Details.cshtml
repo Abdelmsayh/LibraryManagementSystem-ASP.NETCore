@@ -1,0 +1,90 @@
+﻿@model MemberDTO
+@inject SignInManager<ApplicationUser> _signInManager
+
+@{
+    ViewBag.Title = "Member Details";
+}
+
+<div class="content-wrapper">
+    <!-- Header -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Member Details</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Member" asp-action="Index">Members List</a>
+                        </li>
+                        <li class="breadcrumb-item active">Details</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h3 class="card-title">👤 Details for @Model.FullName</h3>
+                </div>
+
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="fw-bold">Full Name</label>
+                            <input asp-for="FullName" class="form-control" readonly />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="fw-bold">Email</label>
+                            <input asp-for="Email" class="form-control" readonly />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="fw-bold">Phone</label>
+                            <input asp-for="Phone" class="form-control" readonly />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="fw-bold">Membership Start Date</label>
+                            <input asp-for="MembershipStartDate" class="form-control" readonly />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="fw-bold">Membership End Date</label>
+                            <input asp-for="MembershipEndDate" class="form-control" readonly />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="fw-bold">Status</label>
+                            <input class="form-control"
+                                   value="@(Model.IsActive ? "Active" : "Inactive")"
+                                   readonly />
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a asp-controller="Member" asp-action="Index" class="btn btn-primary me-2">
+                            <i class="fas fa-arrow-left"></i> Back to List
+                        </a>
+                        <a asp-controller="Member" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning me-2">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin")){
+                            <a asp-controller="Member" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+                                 <i class="fas fa-trash"></i> Delete
+                             </a>
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

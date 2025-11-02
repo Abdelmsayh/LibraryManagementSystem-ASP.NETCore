@@ -1,0 +1,69 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\CLS Course\\.Net\\LibareryMS.App\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DCC71E48-3E15-4B59-829A-EFF303A6817C}|UI_APIs\\UI_APIs.csproj|e:\\cls course\\.net\\libareryms.app\\ui_apis\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DCC71E48-3E15-4B59-829A-EFF303A6817C}|UI_APIs\\UI_APIs.csproj|solutionrelative:ui_apis\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DCC71E48-3E15-4B59-829A-EFF303A6817C}|UI_APIs\\UI_APIs.csproj|e:\\cls course\\.net\\libareryms.app\\ui_apis\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DCC71E48-3E15-4B59-829A-EFF303A6817C}|UI_APIs\\UI_APIs.csproj|solutionrelative:ui_apis\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8F98F1C-3EC6-4C3C-AF00-68BC89CCA606}|BLL\\BLL.csproj|e:\\cls course\\.net\\libareryms.app\\bll\\service\\usermanagementservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8F98F1C-3EC6-4C3C-AF00-68BC89CCA606}|BLL\\BLL.csproj|solutionrelative:bll\\service\\usermanagementservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "E:\\CLS Course\\.Net\\LibareryMS.App\\UI_APIs\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "UI_APIs\\Controllers\\AccountController.cs",
+              "ToolTip": "E:\\CLS Course\\.Net\\LibareryMS.App\\UI_APIs\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "UI_APIs\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-02T20:04:54.63Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserManagementService.cs",
+              "DocumentMoniker": "E:\\CLS Course\\.Net\\LibareryMS.App\\BLL\\Service\\UserManagementService.cs",
+              "RelativeDocumentMoniker": "BLL\\Service\\UserManagementService.cs",
+              "ToolTip": "E:\\CLS Course\\.Net\\LibareryMS.App\\BLL\\Service\\UserManagementService.cs",
+              "RelativeToolTip": "BLL\\Service\\UserManagementService.cs",
+              "ViewState": "AgIAAKEAAAAAAAAAAAAwwMAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-02T20:04:47.581Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\CLS Course\\.Net\\LibareryMS.App\\UI_APIs\\Program.cs",
+              "RelativeDocumentMoniker": "UI_APIs\\Program.cs",
+              "ToolTip": "E:\\CLS Course\\.Net\\LibareryMS.App\\UI_APIs\\Program.cs",
+              "RelativeToolTip": "UI_APIs\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-02T20:04:26.054Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

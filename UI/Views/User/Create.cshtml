@@ -1,0 +1,103 @@
+﻿@model ApplicationUser
+
+@{
+    ViewBag.Title = "Create User";
+}
+
+@section JqueryValidation {
+    <script src="~/plugins/jquery-validation/jquery.validate.js"></script>
+    <script src="~/plugins/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Create New User</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="User" asp-action="Index">Users List</a>
+                        </li>
+                        <li class="breadcrumb-item active">Create</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">👤 Add New User</h3>
+                    <div class="card-tools">
+                        <a asp-controller="User" asp-action="Index" class="btn btn-light btn-sm">
+                            <i class="fas fa-arrow-left"></i> Back to List
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="UserName" class="form-label fw-bold"></label>
+                                <input asp-for="UserName" class="form-control" placeholder="Enter username" />
+                                <span asp-validation-for="UserName" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="PlainPassword" class="form-label fw-bold"></label>
+                                <input asp-for="PlainPassword" class="form-control" type="password" placeholder="Enter password" />
+                                <span asp-validation-for="PlainPassword" class="text-danger"></span>
+
+
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Email" class="form-label fw-bold"></label>
+                                <input asp-for="Email" class="form-control" type="email" placeholder="Enter email" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label asp-for="MemberId" class="form-label fw-bold"></label>
+                                <select asp-for="MemberId" class="form-select" asp-items="ViewBag.MemberList">
+                                    <option value="">-- Select Member --</option>
+                                </select>
+                                <span asp-validation-for="MemberId" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label asp-for="IsActive" class="form-label fw-bold"></label>
+                                <select asp-for="IsActive" class="form-select">
+                                    <option value="true">Active</option>
+                                    <option value="false">Inactive</option>
+                                </select>
+                                <span asp-validation-for="IsActive" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                      
+
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn btn-success px-4">
+                                <i class="fas fa-save"></i> Save
+                            </button>
+                            <button type="reset" class="btn btn-secondary px-4 ms-2">
+                                <i class="fas fa-undo"></i> Reset
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

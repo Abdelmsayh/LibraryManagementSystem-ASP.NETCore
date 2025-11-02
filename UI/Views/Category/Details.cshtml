@@ -1,0 +1,57 @@
+﻿@model CategoryDTO
+@inject SignInManager<ApplicationUser> _signInManager
+
+@{
+    ViewBag.Title = "Category Details";
+}
+
+<div class="content-wrapper">
+    <!-- Header -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Category Details</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-controller="Category" asp-action="Index">Categories List</a></li>
+                        <li class="breadcrumb-item active">Details</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h3 class="card-title">🗂️ Details for @Model.CategoryName</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label>Category Name</label>
+                            <input asp-for="CategoryName" class="form-control" readonly />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Category Description</label>
+                            <input asp-for="Description" class="form-control" readonly />
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <a asp-controller="Category" asp-action="Index" class="btn btn-primary me-2">Return</a>
+                         @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin")){
+                                <a asp-controller="Category" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success me-2">Update</a>
+                                <a asp-controller="Category" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-warning">Delete</a>
+                         }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

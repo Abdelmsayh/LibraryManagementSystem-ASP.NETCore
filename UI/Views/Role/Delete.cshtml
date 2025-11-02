@@ -1,0 +1,61 @@
+﻿@model ApplicationRole
+
+@{
+    ViewBag.Title = "Delete Role";
+}
+
+<div class="content-wrapper">
+    <div class="content-header py-3 border-bottom mb-4">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <h3 class="m-0 text-danger fw-bold">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                Delete Role: <span class="text-dark">@Model.Name</span>
+            </h3>
+            <ol class="breadcrumb float-sm-right mb-0">
+                <li class="breadcrumb-item"><a asp-controller="Role" asp-action="Index">Role List</a></li>
+                <li class="breadcrumb-item active text-danger">Delete</li>
+            </ol>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid d-flex justify-content-center">
+            <div class="card shadow-lg w-75 border-0">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0"><i class="fas fa-trash-alt me-2"></i>Confirm Delete</h5>
+                </div>
+
+                <div class="card-body bg-light">
+                    <form asp-controller="Role" asp-action="Delete" method="post" class="needs-validation">
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Role Name</label>
+                                <input type="text" class="form-control" asp-for="Name" readonly />
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Description</label>
+                                <input type="text" class="form-control" asp-for="Description" readonly />
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-danger px-4 me-2">
+                                <i class="fas fa-ban me-1"></i> Delete
+                            </button>
+                            <a asp-controller="Role" asp-action="Index" class="btn btn-secondary px-4">
+                                <i class="fas fa-times me-1"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-footer text-muted text-center small">
+                    <i class="fas fa-info-circle me-1"></i> This action will delete it permanently.
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

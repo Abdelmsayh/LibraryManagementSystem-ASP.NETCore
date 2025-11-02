@@ -1,0 +1,64 @@
+﻿@model CategoryDTO
+@{
+    ViewBag.Title = "Edit Category";
+}
+
+@section JqueryValidation {
+    <script src="~/plugins/jquery-validation/jquery.validate.js"></script>
+    <script src="~/plugins/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}
+
+<div class="content-wrapper">
+    <!-- Header -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Edit Category</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Category" asp-action="Index">Categories List</a>
+                        </li>
+                        <li class="breadcrumb-item active">Edit</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title">🗂️ Update Category</h3>
+                </div>
+
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="CategoryName" class="form-label"></label>
+                                <input asp-for="CategoryName" class="form-control" placeholder="Enter category name" />
+                                <span asp-validation-for="CategoryName" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Description" class="form-label"></label>
+                                <input asp-for="Description" class="form-control" placeholder="Enter category description" />
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <input type="submit" value="Save Changes" class="btn btn-success" />
+                            <a asp-controller="Category" asp-action="Index" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

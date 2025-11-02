@@ -1,0 +1,129 @@
+﻿@model BLL.Models.BorrowingTransactionDTO
+
+@{
+    ViewBag.Title = "Create Borrowing Transaction";
+}
+
+@section JqueryValidation {
+    <script src="~/plugins/jquery-validation/jquery.validate.js"></script>
+    <script src="~/plugins/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Create Borrowing Transaction</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Borrow" asp-action="Index">Transactions List</a>
+                        </li>
+                        <li class="breadcrumb-item active">Create</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">📘 Add New Borrowing Transaction</h3>
+                    <div class="card-tools">
+                        <a asp-controller="Borrow" asp-action="Index" class="btn btn-light btn-sm">
+                            <i class="fas fa-arrow-left"></i> Back to List
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="row mb-3">
+                            <!-- Category -->
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">Select Category</label>
+                                <select id="CategorySelect" class="form-select" asp-items="ViewBag.Categories">
+                                    <option value="">-- Select Category --</option>
+                                </select>
+                            </div>
+
+                            <!-- Book -->
+                            <div class="col-md-4">
+                                <label asp-for="BookId" class="form-label fw-bold">Select Book</label>
+                                <select id="BookSelect" asp-for="BookId" class="form-select">
+                                    <option value="">-- Select Book --</option>
+                                </select>
+                                <span asp-validation-for="BookId" class="text-danger"></span>
+                            </div>
+
+                            <!-- Member -->
+                            <div class="col-md-4">
+                                <label asp-for="MemberId" class="form-label fw-bold">Select Member</label>
+                                <select asp-for="MemberId" class="form-select" asp-items="ViewBag.Members">
+                                    <option value="">-- Select Member --</option>
+                                </select>
+                                <span asp-validation-for="MemberId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="BorrowingDate" class="form-label fw-bold"></label>
+                                <input asp-for="BorrowingDate" class="form-control" type="date" />
+                                <span asp-validation-for="BorrowingDate" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="DueDate" class="form-label fw-bold"></label>
+                                <input asp-for="DueDate" class="form-control" type="date" />
+                                <span asp-validation-for="DueDate" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success px-4">
+                                <i class="fas fa-save"></i> Save
+                            </button>
+                            <button type="reset" class="btn btn-secondary px-4 ms-2">
+                                <i class="fas fa-undo"></i> Reset
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#CategorySelect").change(function () {
+                var categoryId = $(this).val();
+                $("#BookSelect").empty().append("<option value=''>-- Select Book --</option>");
+
+                if (categoryId) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/Borrow/AjaxCall_GetBooksByCategory",
+                        data: { CatId: categoryId },
+                        success: function (res) {
+                            $.each(res, function (i, e) {
+                                $("#BookSelect").append("<option value='" + e.id + "'>" + e.title + "</option>");
+                            });
+                        },
+                        error: function () {
+                            alert("Failed to load books for this category.");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
