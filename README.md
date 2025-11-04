@@ -117,3 +117,9 @@ Consists of **two projects**:
 **Abd El-Masih Khamis Habib Abou El-Yamein**  
 Faculty of Computers and Information – Minia University  
 Full Stack .NET Diploma Student  
+
+
+===
+![Home Page](./assets/image1.png)
+![Dashboard](./assets/image2.png)
+
