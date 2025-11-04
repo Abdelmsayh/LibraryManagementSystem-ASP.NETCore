@@ -119,3 +119,8 @@ Faculty of Computers and Information – Minia University
 Full Stack .NET Diploma Student  
 
 
+--- 
+🎬 **Project Demo**
+Watch the full demo on Google Drive: [Click here to view](https://drive.google.com/drive/folders/1w-8R1y9jgc0xqUiQjjqbg8P-1Big55HF?dmr=1&ec=wgc-drive-hero-goto)
+
+
